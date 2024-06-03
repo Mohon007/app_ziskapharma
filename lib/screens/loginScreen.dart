@@ -34,7 +34,7 @@ class _LoginscreenState extends State<Loginscreen> {
       final url = Uri.parse(
           // 'http://10.0.2.2:65143/api/LogIn/Proc_UserCheckYesNoByApiDataSet');
           // 'http://192.168.0.106:65143/api/LogIn/Proc_UserCheckYesNoByApiDataSet');
-          'http://192.168.0.106:45455/api/LogIn/Proc_UserCheckYesNoByApiDataSet');
+          'http://192.168.0.108:45455/api/LogIn/Proc_UserCheckYesNoByApiDataSet');
       // 'http://localhost:65143/api/LogIn/Proc_UserCheckYesNoByApiDataSet');
 
       print(url);

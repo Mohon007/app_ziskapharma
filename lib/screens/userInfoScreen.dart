@@ -11,7 +11,7 @@ class Userinfoscreen extends HookWidget {
 
   Future<void> _submitHandler(BuildContext context, User? userData) async {
     final url = Uri.parse(
-        'http://192.168.0.106:45455/api/UserInfo/Proc_UserUpdateByApi');
+        'http://192.168.0.108:45455/api/UserInfo/Proc_UserUpdateByApi');
     final headers = {"Content-Type": "application/json"};
     final body = json.encode({
       "userId": userData?.userUID,
@@ -51,16 +51,24 @@ class Userinfoscreen extends HookWidget {
     ///
     TextEditingController userIdController =
         TextEditingController(text: userData.value?.userUID ?? "");
-    TextEditingController passwordController = TextEditingController(text: userData.value?.userPws ?? "");
-    TextEditingController fullNameController = TextEditingController(text: userData.value?.userFullName ?? "");
-    TextEditingController userDesignationController = TextEditingController(text: userData.value?.userDesignation ?? "");
-    TextEditingController userMobileNoController = TextEditingController(text: userData.value?.userMobileNo ?? "");
-    TextEditingController userEmailController = TextEditingController(text: userData.value?.userEmail ?? "");
-    TextEditingController userDepartmentController = TextEditingController(text: userData.value?.userDepartment ?? "");
+    TextEditingController passwordController =
+        TextEditingController(text: userData.value?.userPws ?? "");
+    TextEditingController fullNameController =
+        TextEditingController(text: userData.value?.userFullName ?? "");
+    TextEditingController userDesignationController =
+        TextEditingController(text: userData.value?.userDesignation ?? "");
+    TextEditingController userMobileNoController =
+        TextEditingController(text: userData.value?.userMobileNo ?? "");
+    TextEditingController userEmailController =
+        TextEditingController(text: userData.value?.userEmail ?? "");
+    TextEditingController userDepartmentController =
+        TextEditingController(text: userData.value?.userDepartment ?? "");
     TextEditingController userDepartmentCodeController =
         TextEditingController(text: userData.value?.userDepartmentCode ?? "");
-    TextEditingController userBrnCodeController = TextEditingController(text: userData.value?.userBrnCode ?? "");
-    TextEditingController userBrnNameController = TextEditingController(text: userData.value?.userBrnName ?? "");
+    TextEditingController userBrnCodeController =
+        TextEditingController(text: userData.value?.userBrnCode ?? "");
+    TextEditingController userBrnNameController =
+        TextEditingController(text: userData.value?.userBrnName ?? "");
 
 // Create controllers for other fields as needed
 
@@ -71,7 +79,7 @@ class Userinfoscreen extends HookWidget {
 
     Future<void> _submitPost() async {
       final url =
-          Uri.parse('http://192.168.0.106:45455/api/UserInfo/Proc_SaveByApi');
+          Uri.parse('http://192.168.0.108:45455/api/UserInfo/Proc_SaveByApi');
       final headers = {"Content-Type": "application/json"};
 
       // Create the JSON payload
@@ -81,21 +89,37 @@ class Userinfoscreen extends HookWidget {
             "user_ID": userIdController.text ?? userData.value!.userID,
             "user_UID": userIdController.text,
             "user_Pws": passwordController.text,
-            "user_FullName": fullNameController,
-            "user_Department": userDepartmentController,
-            "user_DepartmentCode": userDepartmentCodeController,
-            "user_Designation": userDesignationController,
-            "user_MobileNo": userMobileNoController,
-            "user_Email": userEmailController,
+            "user_FullName": fullNameController.text.isEmpty
+                ? userData.value!.userFullName
+                : fullNameController.text,
+            "user_Department": userDepartmentController.text.isEmpty
+                ? userData.value!.userDepartment
+                : userDepartmentController.text,
+            "user_DepartmentCode": userDepartmentCodeController.text.isEmpty
+                ? userData.value!.userDepartmentCode
+                : userDepartmentCodeController.text,
+            "user_Designation": userDesignationController.text.isEmpty
+                ? userData.value!.userDesignation
+                : userDesignationController.text,
+            "user_MobileNo": userMobileNoController.text.isEmpty
+                ? userData.value!.userMobileNo
+                : userMobileNoController.text,
+            "user_Email": userEmailController.text.isEmpty
+                ? userData.value!.userEmail
+                : userEmailController.text,
             "user_BrnID": userData.value!.userBrnID,
-            "user_BrnCode": userBrnCodeController,
-            "user_BrnName": userBrnNameController,
+            "user_BrnCode": userBrnCodeController.text.isEmpty
+                ? userData.value!.userBrnCode
+                : userBrnCodeController.text,
+            "user_BrnName": userBrnNameController.text.isEmpty
+                ? userData.value!.userBrnName
+                : userBrnNameController.text,
             "user_imagePicture": userData.value!.userImagePicture,
             "user_imageSignature": userData.value!.userImageSignature,
           }
         ]
       });
-
+      print("*********************");
       print(payload);
 
       try {
@@ -117,7 +141,7 @@ class Userinfoscreen extends HookWidget {
     _fetchData() async {
       try {
         final url = Uri.parse(
-            'http://192.168.0.106:45455/api/UserInfo/Proc_UserDisplayByApi/?user_UID=' +
+            'http://192.168.0.108:45455/api/UserInfo/Proc_UserDisplayByApi/?user_UID=' +
                 provider.user_id);
 
         final response = await http.get(url);
